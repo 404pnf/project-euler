@@ -13,6 +13,13 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 # 小心重复计算了那些是15的倍数的数
 # 没想到第一题就有陷阱啊！
 
+ a = (1..1000).select { |i| i % 3 == 0} + (1..1000).select { |i| i % 5 == 0}
+p a.uniq.reduce(:+)
+
+=begin
+# 错误的
+# 去掉重复的时候又去除多了
+# 
 def sum_of_multiples(min: 1, max: 1000, factors: [3,5])
   r = []
   factors.each do |i|
@@ -23,5 +30,6 @@ end
 
 p (1..1000).select {|i| i % 3 == 0 or i % 5 == 0}.reject {|i| i % 15 == 0}.reduce(:+)
 p sum_of_multiples
+=end
 
 
