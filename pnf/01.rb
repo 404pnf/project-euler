@@ -13,7 +13,8 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 # 小心重复计算了那些是15的倍数的数
 # 没想到第一题就有陷阱啊！
 
- a = (1..1000).select { |i| i % 3 == 0} + (1..1000).select { |i| i % 5 == 0}
+# 不包括1000，因为原文是“below 1000” 
+a = (1..999).select { |i| i % 3 == 0} + (1..999).select { |i| i % 5 == 0}
 p a.uniq.reduce(:+)
 
 =begin
