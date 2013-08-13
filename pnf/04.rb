@@ -13,15 +13,9 @@ def palindrome? n
   n.to_s == n.to_s.reverse
 end
 
-range = (100..999)
-
-candidates = (range.to_a + range.to_a).permutation(2)
-# 是不是用product更好
-# candidates = range.product range
-
-result = candidates.reduce([]) {|col, (a, b)| col << a * b if palindrome? a * b; col}
+range = (100..999).to_a
+combination = range.product range
+result = combination.reduce([]) {|col, (a, b)| col << a * b if palindrome? a * b; col}
 
 p "符合要求的组合有#{result.size} 组"
 p result.max
-
-

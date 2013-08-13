@@ -10,5 +10,18 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 # http://projecteuler.net/problem=1
 
-p (1..1000).select {|i| i % 3 == 0 or i % 5 == 0}.reduce(:+)
+# 小心重复计算了那些是15的倍数的数
+# 没想到第一题就有陷阱啊！
+
+def sum_of_multiples(min: 1, max: 1000, factors: [3,5])
+  r = []
+  factors.each do |i|
+    r << (min..max).select { |j| j % i == 0}
+  end
+  r.flatten.reject {|i| i % factors.reduce(:*) == 0}.reduce(:+)
+end
+
+p (1..1000).select {|i| i % 3 == 0 or i % 5 == 0}.reject {|i| i % 15 == 0}.reduce(:+)
+p sum_of_multiples
+
 
