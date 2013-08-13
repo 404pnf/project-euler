@@ -16,21 +16,8 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 # 不包括1000，因为原文是“below 1000” 
 a = (1..999).select { |i| i % 3 == 0} + (1..999).select { |i| i % 5 == 0}
 p a.uniq.reduce(:+)
+p (1..999).select {|i| i % 3 == 0 or i % 5 == 0}.reduce(:+)
 
-=begin
-# 错误的
-# 去掉重复的时候又去除多了
-# 
-def sum_of_multiples(min: 1, max: 1000, factors: [3,5])
-  r = []
-  factors.each do |i|
-    r << (min..max).select { |j| j % i == 0}
-  end
-  r.flatten.reject {|i| i % factors.reduce(:*) == 0}.reduce(:+)
-end
 
-p (1..1000).select {|i| i % 3 == 0 or i % 5 == 0}.reject {|i| i % 15 == 0}.reduce(:+)
-p sum_of_multiples
-=end
 
 
