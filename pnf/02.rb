@@ -10,7 +10,7 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 =end
 
 # stolen form  http://www.ruby-doc.org/core-2.0/Enumerator.html#method-c-new
-fib = Enumerator.new do |y|
+FIB = Enumerator.new do |y|
   a = b = 1
   loop do
     y << a
@@ -18,4 +18,16 @@ fib = Enumerator.new do |y|
   end
 end
 
-p fib.take_while {|i| i < 4000000}.select { |i| i.even?}.reduce(:+)
+def even_fib_sum
+  FIB.take_while { |i| i < 4_000_000 }
+  .select { |i| i.even? }
+  .reduce(:+)
+end
+
+require 'test/unit'
+# testing
+class TestMyLast < Test::Unit::TestCase
+  def test_even_fib_sum
+    assert_equal 4_613_732, even_fib_sum
+  end
+end
