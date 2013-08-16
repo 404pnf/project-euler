@@ -1,7 +1,6 @@
 AsciiComments:
   # Description: 'Use only ascii symbols in identifiers.'
   Enabled: false
-  
 
 BlockComments:
   # Description: 'Do not use block comments.'
@@ -10,3 +9,12 @@ BlockComments:
 LineLength:
   # Description: 'Limit lines to 79 characters.'
   Enabled: false
+  
+DefWithParentheses:
+  # Description: 'Use def with parentheses when there are arguments.'
+  Enabled: false
+
+DefWithoutParentheses:
+  Enabled: false
+
+

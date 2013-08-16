@@ -11,48 +11,32 @@ require 'prime'
 
 # so i cheated  :) with the std lib prime
 
-def ff n, r=[]
+def largest_prime_factor(n, r = [])
   prime = Prime.lazy
   r = r || []
   if n.prime?
     r << n
     return r
   else
-    factor = prime.find { |j| n % j == 0} # 用find，找到第一个就结束
+    factor = prime.find { |j| n % j == 0 } # 用find，找到第一个就结束
     r << factor
     prime.rewind
-    ff (n / factor), r
+    largest_prime_factor (n / factor), r
   end
+  r.max
 end
 
-p ff 600851475143
-
-=begin
-# 下面的函数是错误的！！错在哪里我还没有发现
-def f n, r=[]
-  prime = Prime.lazy.to_enum
-  r = r || []
-  if n.prime?
-    r << n
-    return r
-  else
-    factor = prime.next
-    unless n % factor == 0
-      factor = prime.next
-    end
-    # so so slow
-    # because need to caculate all the primes < n / 2 first, even though we might only need the first a few primes
-    #factor = prime.take_while {|i| i < n / 2}.find {|i| n % i == 0}
-    r << factor
-    prime.rewind
-    f (n / factor), r
+require 'test/unit'
+# testing
+class TestMyLast < Test::Unit::TestCase
+  def test_largest_prime_factor
+    assert_equal 6857, largest_prime_factor(600_851_475_143)
   end
 end
-
 # 下面的算法也是错误的，因为它太慢了！
-def largest_prime_factor number
-  primes = Prime.lazy.take_while { |j| j < number} #很慢很慢很慢
+def largest_prime_factor_wrong(number)
+  primes = Prime.lazy.take_while { |j| j < number }
+  # 很慢很慢很慢
   # 因为先算了很多很多没有用的质数出来
-  primes.to_a.reverse.find { |j| number % j == 0}
+  primes.to_a.reverse.find { |j| number % j == 0 }
 end
-=end

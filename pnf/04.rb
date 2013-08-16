@@ -13,9 +13,21 @@ def palindrome? n
   n.to_s == n.to_s.reverse
 end
 
-range = (100..999).to_a
-combination = range.product range
-result = combination.reduce([]) {|col, (a, b)| col << a * b if palindrome? a * b; col}
+def max_palidrome_product
+  range = (100..999).to_a
+  combination = range.product range
+  r = []
+  combination.each { |(a, b)| r << (a * b) if palindrome?(a * b) }
+  r.max
+end
 
-p "符合要求的组合有#{result.size} 组"
-p result.max
+# p "符合要求的组合有#{result.size} 组"
+# p result.max
+
+require 'test/unit'
+# testing
+class TestMyLast < Test::Unit::TestCase
+  def test_max_panlidrome_product
+    assert_equal 906_609 , max_palidrome_product
+  end
+end

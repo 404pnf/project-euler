@@ -50,11 +50,21 @@ number_string = <<eof
 71636269561882670428252483600823257530420752963450
 eof
 
-number_s = number_string.split.join
+NUMBER_S = number_string.split.join
 
 # 让我偷懒吧
 # 因为ruby内置的方法真是全包括了。哈哈
 
 # each_cons出来是 ["7", "3", "1", "6", "7"]
 # ["7", "3", "1", "6", "7"].map(&:to_i).reduce(:*)
-p number_s.split(//).each_cons(5).reduce([]) { |r, n| r << n.map(&:to_i).reduce(:*); r}.max
+def r
+  NUMBER_S.split(//).each_cons(5).reduce([]) { |a, e| a << e.map(&:to_i).reduce(:*) }.max
+end
+
+require 'test/unit'
+# testing
+class TestMyLast < Test::Unit::TestCase
+  def test_n_primes
+    assert_equal 40_824, r
+  end
+end

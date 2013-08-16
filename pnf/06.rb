@@ -14,15 +14,23 @@ Find the difference between the sum of the squares of the first one hundred natu
 
 =end
 
-
 def sum_of_sq range
-  range.to_a.map { |i| i ** 2}.reduce(:+)
+  range.to_a.map { |i| i**2 }.reduce(:+)
 end
 
 def sq_of_sum range
-  range.to_a.reduce(:+) ** 2
+  range.to_a.reduce(:+)**2
 end
 
-numbers = (1..100)
+def r
+  numbers = (1..100)
+  sq_of_sum(numbers) - sum_of_sq(numbers)
+end
 
-p sum_of_sq(numbers) - sq_of_sum(numbers)
+require 'test/unit'
+# testing
+class TestMyLast < Test::Unit::TestCase
+  def test_r
+    assert_equal 25_164_150 , r
+  end
+end
